@@ -98,12 +98,8 @@ input[type="submit"] {
 .error-validation {
   color: #ff1a1a;
   position: absolute;
-  bottom: 18px;
+  top: 57px;
   font-size: 12px;
-}
-
-.half-box .error-validation {
-  bottom: 8px;
 }
 
 .template {

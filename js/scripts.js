@@ -4,7 +4,9 @@ class Validator {
     this.validations = [
       'data-min-length',
       'data-max-length',
-      'data-email-validate'
+      'data-email-validate',
+      'data-required',
+      'data-equal',
     ]
   }
 
@@ -90,9 +92,34 @@ class Validator {
 
   }
 
-  printMessage(input, msg) {
+  // verificar se um campo está igual o outro
+  equal(input, inputName) {
 
+    let inputToCompare = document.getElementsByName(inputName)[0];
+
+    console.log(inputToCompare);
+
+    let inputToCompareName = inputToCompare.getAttribute("name");;
+
+    let errorMessage = `Este campo precisa estar igual ao ${inputToCompareName}`;
+
+    if(input.value != inputToCompare.value) {
+      this.printMessage(input, errorMessage);
+    }
+  }
+  
+  // método para exibir inputs que são necessários
+  required(input) {
+
+    let errorMessage = `Este campo é obrigatório`;
+
+    this.printMessage(input, errorMessage);
     
+  }
+
+  // método para imprimir mensagens de erro
+  printMessage(input, msg) {
+  
     // checa os erros presentes no input
     let errorsQty = input.parentNode.querySelector('.error-validation');
 
