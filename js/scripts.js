@@ -7,6 +7,7 @@ class Validator {
       'data-email-validate',
       'data-required',
       'data-equal',
+      'data-password-validate',
     ]
   }
 
@@ -34,8 +35,6 @@ class Validator {
 
           // limpa string para saber o método
           let method = this.validations[i].replace("data-", "").replace("-", "");
-
-          console.log(method);
 
           // valor do input
           let value = input.getAttribute(this.validations[i])
@@ -84,8 +83,6 @@ class Validator {
 
     let errorMessage = `Insira um e-mail no padrão matheus@email.com`;
 
-    console.log('oi');
-
     if(!re.test(email)) {
       this.printMessage(input, errorMessage);
     }
@@ -96,8 +93,6 @@ class Validator {
   equal(input, inputName) {
 
     let inputToCompare = document.getElementsByName(inputName)[0];
-
-    console.log(inputToCompare);
 
     let inputToCompareName = inputToCompare.getAttribute("name");;
 
@@ -111,10 +106,39 @@ class Validator {
   // método para exibir inputs que são necessários
   required(input) {
 
-    let errorMessage = `Este campo é obrigatório`;
+    let inputValue = input.value;
 
-    this.printMessage(input, errorMessage);
-    
+    if(inputValue === '') {
+      let errorMessage = `Este campo é obrigatório`;
+
+      this.printMessage(input, errorMessage);
+    }
+
+  }
+
+  // validando o campo de senha
+  passwordvalidate(input) {
+
+    // explodir string em array
+    let charArr = input.value.split("");
+
+    let uppercases = 0;
+    let numbers = 0;
+
+    for(let i = 0; charArr.length > i; i++) {
+      if(charArr[i] === charArr[i].toUpperCase() && isNaN(parseInt(charArr[i]))) {
+        uppercases++;
+      } else if(!isNaN(parseInt(charArr[i]))) {
+        numbers++;
+      }
+    }
+
+    if(uppercases === 0 || numbers === 0) {
+      let errorMessage = `A senha precisa um caractere maiúsculo e um número`;
+
+      this.printMessage(input, errorMessage);
+    }
+
   }
 
   // método para imprimir mensagens de erro
