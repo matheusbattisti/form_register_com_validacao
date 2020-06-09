@@ -25,7 +25,7 @@ class Validator {
     // pegar todos inputs
     let inputs = form.getElementsByTagName('input');
     // transformar HTMLCollection em arr
-    var inputsArray = [...inputs];
+    let inputsArray = [...inputs];
 
     // loop nos inputs e validação mediante aos atributos encontrados
     inputsArray.forEach(function(input, obj) {
@@ -79,7 +79,7 @@ class Validator {
   // método para validar strings que só contem letras
   onlyletters(input) {
 
-    var re = /^[A-Za-z]+$/;;
+    let re = /^[A-Za-z]+$/;;
 
     let inputValue = input.value;
 
@@ -93,7 +93,7 @@ class Validator {
 
   // método para validar e-mail
   emailvalidate(input) {
-    var re = /\S+@\S+\.\S+/;
+    let re = /\S+@\S+\.\S+/;
 
     let email = input.value;
 
@@ -110,9 +110,7 @@ class Validator {
 
     let inputToCompare = document.getElementsByName(inputName)[0];
 
-    let inputToCompareName = inputToCompare.getAttribute("name");;
-
-    let errorMessage = `Este campo precisa estar igual ao ${inputToCompareName}`;
+    let errorMessage = `Este campo precisa estar igual ao ${inputName}`;
 
     if(input.value != inputToCompare.value) {
       this.printMessage(input, errorMessage);
