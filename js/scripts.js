@@ -4,6 +4,7 @@ class Validator {
     this.validations = [
       'data-min-length',
       'data-max-length',
+      'data-only-letters',
       'data-email-validate',
       'data-required',
       'data-equal',
@@ -70,6 +71,21 @@ class Validator {
     let errorMessage = `O campo precisa ter menos que ${maxValue} caracteres`;
 
     if(inputLength > maxValue) {
+      this.printMessage(input, errorMessage);
+    }
+
+  }
+
+  // método para validar strings que só contem letras
+  onlyletters(input) {
+
+    var re = /^[A-Za-z]+$/;;
+
+    let inputValue = input.value;
+
+    let errorMessage = `Este campo não aceita números nem caracteres especiais`;
+
+    if(!re.test(inputValue)) {
       this.printMessage(input, errorMessage);
     }
 
